@@ -2,9 +2,12 @@ package com.example.myapp3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_main);
 
         //화면에 연결
@@ -50,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(input1.equals(m_id) && input2.equals(m_pass)){
                     //Toast.makeText(getApplicationContext(), "로그인 성공!", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                    Intent intent = new Intent(MainActivity.this, ItemActivity.class);
                     intent.putExtra("myId", m_id);
                     startActivity(intent);
 //                    text1.setText("로그인");
@@ -96,4 +102,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onDestroy() {
+        Toast.makeText(getApplicationContext(), "종료", Toast.LENGTH_LONG).show();
+        super.onDestroy();
+    }
 }
